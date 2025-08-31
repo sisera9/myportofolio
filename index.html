@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portofolio — Sisera (Art Kaligrafi)</title>
+
+  <!-- Font & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+
+  <style>
+    :root{
+      --bg:#070707;
+      --card:#0f0f10;
+      --muted:#bdb6b0;
+      --gold:#d9b24a;
+      --accent:#ff006a;
+      --white:#f6f5f3;
+      --glass: rgba(255,255,255,0.03);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:'Poppins',system-ui,Arial,sans-serif;background:
+      radial-gradient(600px 300px at 10% 8%, rgba(217,178,74,0.03), transparent 20%), var(--bg);color:var(--white);scroll-behavior:smooth;}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1180px,94%);margin:0 auto;padding-bottom:60px}
+
+    /* NAV */
+    header{position:sticky;top:0;z-index:90;background:linear-gradient(180deg, rgba(7,7,7,0.82), rgba(7,7,7,0.55));backdrop-filter:blur(6px)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--accent));display:grid;place-items:center;color:#111;font-weight:800;font-size:18px}
+    nav a{margin-left:18px;color:var(--muted);font-weight:600;transition:color .25s, transform .15s}
+    nav a:hover{color:var(--gold);transform:translateY(-2px)}
+    nav a.active{color:var(--gold);border-bottom:2px solid rgba(217,178,74,.16);padding-bottom:8px}
+
+    /* HERO */
+    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:stretch;padding:36px 0}
+    .card-hero{background:linear-gradient(135deg,#1a0f07 0%, rgba(217,178,74,0.08) 40%);border-radius:24px;padding:34px;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+    .hero-left{z-index:2}
+    .hero-title{font-size:44px;line-height:1.02;color:var(--gold);margin-bottom:8px}
+    .typing{display:inline-block;border-right:3px solid var(--gold);white-space:nowrap;overflow:hidden}
+    .hero-sub{color:#efe7d6;margin-bottom:20px;font-weight:300}
+    .cta-row{display:flex;gap:12px;align-items:center}
+    .btn{background:var(--gold);color:#111;padding:10px 18px;border-radius:999px;border:none;font-weight:700;cursor:pointer;box-shadow:0 10px 30px rgba(217,178,74,.08);transition:transform .18s}
+    .btn:hover{transform:translateY(-4px)}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.06);color:var(--white)}
+
+    .portrait{position:absolute;right:22px;bottom:6px;top:16px;width:48%;border-radius:16px;overflow:hidden;display:flex;align-items:flex-end;box-shadow:0 20px 50px rgba(0,0,0,.6)}
+    .portrait img{width:100%;height:100%;object-fit:cover;filter:contrast(.98) saturate(.95)}
+
+    /* INFO */
+    .info-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,0.03)}
+    .chip{background:var(--gold);color:#111;padding:7px 12px;border-radius:12px;font-weight:700}
+
+    /* SECTIONS */
+    .section{margin-top:34px}
+    .section .title{display:flex;justify-content:space-between;align-items:end;gap:12px}
+    .title h3{font-size:26px;color:var(--gold);margin:0}
+    .title p{color:var(--muted);margin:0;font-size:14px}
+
+    /* SERVICES */
+    .services{display:flex;gap:14px;margin-top:16px}
+    .service{flex:1;background:var(--card);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);text-align:center;transition:transform .25s, box-shadow .25s}
+    .service:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(0,0,0,.6)}
+    .service h4{color:var(--gold);margin:8px 0}
+
+    /* GRID (Portfolio & Certificates) */
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px}
+    .thumb{position:relative;border-radius:12px;overflow:hidden;cursor:pointer;background:var(--card);border:1px solid rgba(255,255,255,0.03);transition:transform .35s, box-shadow .35s}
+    .thumb img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .45s, filter .3s}
+    .thumb:hover{transform:translateY(-8px);box-shadow:0 18px 50px rgba(0,0,0,.6)}
+    .thumb:hover img{transform:scale(1.06);filter:brightness(1.05)}
+    .label{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,0.46);padding:8px 10px;border-radius:10px;font-weight:600;color:#fff}
+
+    /* FILTERS */
+    .filters{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+    .filter-btn{padding:8px 12px;border-radius:999px;background:transparent;border:1px solid rgba(255,255,255,0.05);color:var(--muted);cursor:pointer}
+    .filter-btn.active{background:linear-gradient(90deg,var(--gold),var(--accent));color:#111;border:none}
+
+    /* TIMELINE (Experience) */
+    .timeline{display:grid;gap:12px;margin-top:16px}
+    .exp{background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .exp h4{margin:0;color:var(--gold)}
+    .exp span{font-size:13px;color:var(--muted)}
+    .exp p{margin-top:8px;color:#efe7d6;font-size:14px}
+
+    /* CONTACT */
+    .contact-card{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+    .form{background:var(--card);padding:16px;border-radius:12px}
+    .form input,.form textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--white);margin-bottom:10px}
+    .form button{background:var(--gold);border:none;padding:12px 14px;border-radius:999px;font-weight:700;cursor:pointer}
+
+    footer{text-align:center;margin:40px 0;color:var(--muted)}
+
+    /* LIGHTBOX */
+    .lightbox{position:fixed;inset:0;background:rgba(4,4,4,0.9);display:none;place-items:center;z-index:120;padding:20px}
+    .lightbox.active{display:grid}
+    .lightbox img{max-width:calc(100% - 80px);max-height:calc(100% - 120px);border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+    .lb-close{position:absolute;top:22px;right:22px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:10px;color:var(--white);cursor:pointer}
+
+    /* Reveal animations */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease, transform .9s ease}
+    .reveal.active{opacity:1;transform:translateY(0)}
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .hero{grid-template-columns:1fr}
+      .portrait{position:relative;width:100%;height:260px;margin-top:18px;border-radius:14px}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .contact-card{grid-template-columns:1fr}
+      nav a{display:none}
+    }
+    @media (max-width:520px){
+      .hero-title{font-size:30px}
+      .logo{width:44px;height:44px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">S</div>
+        <div>
+          <div style="font-weight:800">Sisera</div>
+          <div style="font-size:12px;color:var(--muted)">Calligrapher & Designer</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Work</a>
+        <a href="#certificates">Certificates</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="card-hero">
+        <div class="hero-left">
+          <div class="hero-title"> <span id="typing" class="typing"></span></div>
+          <p class="hero-sub"><b>Art Calligrapher</b> — menyatukan tradisi dan estetika mushaf. Karya untuk dekorasi, dan branding.</p>
+          <div class="cta-row">
+            <button class="btn" onclick="scrollToId('portfolio')">Lihat Karya</button>
+            <button class="btn ghost" onclick="scrollToId('contact')">Masukan</button>
+          </div>
+        </div>
+
+        <div class="portrait" aria-hidden="true">
+          <!-- ganti path gambar dengan gambar kamu -->
+          <img src="images/Progres.jpeg" alt="portrait Sisera" />
+        </div>
+      </div>
+
+      <!-- QUICK INFO -->
+      <aside class="info-card" style="margin-left:12px;margin-top:18px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Lokasi</div>
+            <div style="font-weight:700">Probolinggo, Indonesia</div>
+          </div> 
+
+        <div style="display:flex;gap:12px;align-items:center;margin-top:12px">
+          <img src="images/profil.jpeg" alt="profile" style="width:56px;height:56px;border-radius:10px;object-fit:cover"></img>
+          <div>
+            <div style="font-weight:700">Sisera</div>
+            <div style="font-size:12px;color:var(--muted)">Calligrapher & Designer</div>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+          <a class="btn" href="https://www.instagram.com/baytqalam.sisera" target="_blank" style="padding:8px 12px;font-size:14px">Instagram</a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section reveal">
+      <div class="title">
+        <h3>About Me</h3>
+        <p>Seni kaligrafi sebagai sarana ekspresi & dakwah</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px;align-items:start">
+        <div style="color:#efe7d6">
+          <p style="margin:0 0 12px">Assalamu’alaikum Wr. Wb. <br>
+            Hai, saya <strong>Siti Serli Aviva</strong>, saya menempuh pendidikan di jurusan Rekayasa Perangkat Lunak meskipun jurusan ini berhubungan dengan teknologi dan pemograman, saya sendiri memiliki ketertarikan sendiri terhadap dunia seni terutama karya seni islam yang sedang saya tekuni sampai Sekarang.</p>
+          <ul style="color:var(--muted);margin-top:8px">
+            <li>Berpengalaman: 4+ tahun (latihan,projek hingga menghasilkan karya)</li>
+            <li>Media: tinta, kertas, digital (masih tahap belajar)</li>
+            <li>Khot: Stuluts & Naskhi</li>
+          </ul>
+        </div>
+        <div style="display:grid;gap:10px">
+          <div class="service">
+            <h4>Custom Kaligrafi</h4>
+            <div style="color:var(--muted);font-size:13px">Kanvas, frame, dekorasi</div>
+          </div>
+          <div class="service">
+            <h4>Digital Khot</h4>
+            <div style="color:var(--muted);font-size:13px">File siap cetak & branding</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section reveal">
+      <div class="title"><h3>Services</h3><p style="color:var(--muted)">Apa yang saya tawarkan</p></div>
+      <div class="services">
+        <div class="service"><i class="fa-solid fa-paintbrush" style="font-size:20px;color:var(--accent)"></i><h4>Custom Kanvas</h4><p style="color:var(--muted)">Karya dekoratif & mushaf</p></div>
+        <div class="service"><i class="fa-solid fa-font" style="font-size:20px;color:var(--accent)"></i><h4>Logo & Branding</h4><p style="color:var(--muted)">Tipe grafis berbasis huruf</p></div>
+        <div class="service"><i class="fa-solid fa-tablet-screen-button" style="font-size:20px;color:var(--accent)"></i><h4>Kaligrafi Digital</h4><p style="color:var(--muted)">File vektor & poster</p></div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section id="portfolio" class="section reveal">
+      <div class="title"><h3>Work</h3><p style="color:var(--muted)">Klik untuk lihat detail</p></div>
+
+      <div class="filters">
+        <div class="filters-left" style="display:flex;gap:8px;">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="Digital">Digital</button>
+          <button class="filter-btn" data-filter="Tradisional">Tradisional</button>
+          <button class="filter-btn" data-filter="Logo">Logo</button>
+        </div>
+      </div>
+
+      <div class="grid" id="portfolioGrid">
+        <!-- ganti src/data-full dengan karya asli -->
+        <div class="thumb" data-cat="Digital" data-full="images/poster.png"><img src="images/poster.png" alt="karya 1"><div class="label">Poster Maulid Nabi</div></div>
+        <div class="thumb" data-cat="Tradisional" data-full="images/mushaf.jpeg"><img src="images/mushaf.jpeg" alt="karya 2"><div class="label">Mushaf</div></div>
+        <div class="thumb" data-cat="Tradisional" data-full="images/kaligrafi bentuk.png"><img src="images/kaligrafi bentuk.png" alt="karya 3"><div class="label">kaligrafi bentuk</div></div>
+        <div class="thumb" data-cat="Tradisional" data-full="images/Naskah.png"><img src="images/Naskah.png" alt="karya 4"><div class="label">Naskah</div></div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATES -->
+    <section id="certificates" class="section reveal">
+      <div class="title"><h3>Certificates</h3><p style="color:var(--muted)">Penghargaan & sertifikat</p></div>
+      <div class="grid" id="certGrid">
+        <!-- tambahkan file sertifikat di folder images/ dan ganti src -->
+        <div class="thumb" data-full="images/sertifikat K maulid nabi.jpeg"><img src="images/sertifikat K maulid nabi.jpeg" alt="sertifikat 1"><div class="label">KALIGRAFI MUSHAF AL-QUR'AN</div></div>
+        <div class="thumb" data-full="images/sertifikat PAIS.jpeg"><img src="images/sertifikat PAIS.jpeg" alt="sertifikat 2"><div class="label">KALIGRAFI ISLAM</div></div>
+        <div class="thumb" data-full="images/sertifikat Lulusan.jpeg"><img src="images/sertifikat Lulusan.jpeg" alt="sertifikat 3"><div class="label">KALIGRAFI PENTAS PAIS</div></div>
+        <div class="thumb" data-full="images/sertifikat K kelurahan.jpeg"><img src="images/sertifikat K kelurahan.jpeg" alt="sertifikat 4"><div class="label">KHAT AL-QUR'AN</div></div>
+        <div class="thumb" data-full="images/sertifikat K Kecamatan.jpeg"><img src="images/sertifikat K Kecamatan.jpeg" alt="sertifikat 5"><div class="label">HIASAN MUSHAF</div></div>
+        <div class="thumb" data-full="images/sertifikat kaligrafi kota.jpg"><img src="images/sertifikat kaligrafi kota.jpg" alt="sertifikat 6"><div class="label">HIAS MUSHAF</div></div>
+        <div class="thumb" data-full="images/sertifikat poster.png"><img src="images/sertifikat poster.png" alt="sertifikat 7"><div class="label">POSTER</div></div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section reveal">
+      <div class="title"><h3>Experience</h3><p style="color:var(--muted)">Perjalanan & kegiatan</p></div>
+      <div class="timeline">
+        <div class="exp"><h4>Lomba Kaligrafi</h4><span>2023 — SMPN 9 Probolinggo</span><p>Menjadi juara 1 putri.</p></div>
+        <div class="exp"><h4>Lomba Kaligrafi</h4><span>2023 — Probolinggo</span><p>Menjadi juara Harapan 2.</p></div>
+        <div class="exp"><h4>Lomba Kaligrafi<h4><span>2024 — SMPN 9 Probolinggo</span><p>Menjadi juara 1 putri.</p></div>
+        <div class="exp"><h4>Pameran & Atraksi Melukis Langsung</h4><span>2024 — SMPN 9 Probolinggo</span><p>Berpartisipasi dalam rangka laudcing sekolah digital bersama teman-teman seni lainya</p></div>
+        <div class="exp"><h4>Lomba Kaligrafi</h4><span>2024 — Kebonsari Kulon</span><p>Menjadi juara 1.</p></div>
+        <div class="exp"><h4>Lomba Kaligrafi</h4><span>2024 — Kanigaran</span><p>Menjadi juara 2.</p></div>
+        <div class="exp"><h4>Lomba kaligrafi</h4><span>2024 — Probolinggo</span><p>Menjadi juara harapan 1 putri.</p></div>
+        <div class="exp"><h4>Lomba Poster</h4><span>2024 — SMKN 1 Probolinggo</span><p>Menjadi juara 1 dalam ajang pembuatan poster Maulid Nabi Muhammad.</p></div>
+        <div class="exp"><h4>Lomba Desain Batik</h4><span>2025 — Probolinggo</span><p>Berparsitipasi sebagai peserta dalam memeriahkan ulang tahun Kota Probolinggo yang ke-665.</p></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+<section id="contact" class="section reveal">
+  <div class="title"><h3>Contact</h3><p>Kirim pesan langsung</p></div>
+
+  <div class="contact-card">
+    <!-- FORM -->
+    <div class="form">
+      <h4 style="color:var(--gold)">Form Kontak</h4>
+      <form id="contactForm" onsubmit="sendMail(event)">
+        <input type="text" id="name" placeholder="Nama" required><br>
+        <input type="email" id="email" placeholder="Email" required><br>
+        <textarea id="message" placeholder="Pesan" required></textarea><br>
+        <button type="submit">Kirim Pesan</button>
+      </form>
+    </div>
+
+    <!-- INFO -->
+    <div class="contact-info" style="background:var(--card);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)">
+      <h4 style="color:var(--gold);margin:0 0 10px 0">Informasi Kontak</h4>
+      <p style="color:var(--muted);margin:6px 0">
+        Email: <a href="mailto:sitiserliaviva@gmail.com" style="color:var(--muted)">sitiserliaviva@gmail.com</a>
+      </p>
+      <p style="color:var(--muted);margin:6px 0">
+        Instagram: <a href="https://www.instagram.com/baytqalam.sisera" target="_blank" style="color:var(--muted)">@baytqalam.sisera</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Script EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+"></script>
+<script>
+  (function(){
+    emailjs.init("Wm8PcZEgkIkM438ap"); 
+  })();
+
+  function sendMail(event) {
+    event.preventDefault();
+    emailjs.send("service_7356mvd", "template_dii0joc", {
+      from_name: document.getElementById("name").value,
+      from_email: document.getElementById("email").value,
+      message: document.getElementById("message").value
+    })
+    .then(function(response) {
+      alert("Pesan berhasil dikirim ✅");
+    }, function(error) {
+      alert("Pesan gagal dikirim ❌ " + error.text);
+    });
+  }
+</script>
+
+
+        <div class="contact-info" style="background:var(--card);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)">
+          <h4 style="color:var(--gold);margin:0 0 10px 0">Informasi Kontak</h4>
+          <p style="color:var(--muted);margin:6px 0">Email: <a href="mailto:sitiserliaviva@gmail.com" style="color:var(--muted)">sitiserliaviva@gmail.com</a></p>
+          <p style="color:var(--muted);margin:6px 0">Instagram: <a href="https://www.instagram.com/baytqalam.sisera" target="_blank" style="color:var(--muted)">@baytqalam.sisera</a></p>
+        </div>
+      </div>
+    </section>
+
+    <footer style="margin-top:28px">
+      <div style="padding:20px 0;color:var(--muted);text-align:center">© 2025 — Sisera • Calligrapher & Designer
+</div>
+    </footer>
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-hidden="true">
+    <button class="lb-close" aria-label="Tutup" onclick="closeLB()"><i class="fa-solid fa-x"></i></button>
+    <img id="lb-img" src="" alt="preview">
+  </div>
+
+  <script>
+    /* -------------------------
+       Typing effect (hero)
+       -------------------------*/
+    const words = ["Sisera", "Art Calligrapher", "Kaligrafi Islami"];
+    let wIdx = 0, cIdx = 0, deleting = false;
+    const out = document.getElementById('typing');
+    function typeLoop(){
+      const current = words[wIdx];
+      if(!deleting) { cIdx++; out.textContent = current.slice(0, cIdx); }
+      else { cIdx--; out.textContent = current.slice(0, cIdx); }
+      if(!deleting && cIdx === current.length){ deleting = true; setTimeout(typeLoop, 900); return; }
+      if(deleting && cIdx === 0){ deleting = false; wIdx = (wIdx+1) % words.length; setTimeout(typeLoop, 300); return; }
+      setTimeout(typeLoop, deleting ? 55 : 120);
+    }
+    // init after DOM
+    window.addEventListener('DOMContentLoaded', ()=>{ typeLoop(); });
+
+    /* -------------------------
+       Scroll reveal
+       -------------------------*/
+    const reveals = document.querySelectorAll('.reveal');
+    function revealOnScroll(){
+      const H = window.innerHeight;
+      reveals.forEach(r=>{
+        const top = r.getBoundingClientRect().top;
+        if(top < H - 80) r.classList.add('active');
+      });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+
+    /* -------------------------
+       Lightbox for thumbs
+       -------------------------*/
+    const thumbs = document.querySelectorAll('.thumb');
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    function openLB(src){
+      lbImg.src = src;
+      lb.classList.add('active');
+      lb.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLB(){
+      lb.classList.remove('active');
+      lb.setAttribute('aria-hidden','true');
+      lbImg.src = '';
+      document.body.style.overflow = '';
+    }
+    thumbs.forEach(t=>{
+      t.addEventListener('click', ()=> {
+        const src = t.getAttribute('data-full') || t.querySelector('img').src;
+        openLB(src);
+      });
+    });
+    lb.addEventListener('click', (e)=> { if(e.target === lb) closeLB(); });
+
+    /* -------------------------
+       Portfolio filters
+       -------------------------*/
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        filterBtns.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.filter;
+        const items = document.querySelectorAll('#portfolioGrid .thumb');
+        items.forEach(it=>{
+          if(cat === 'all' || it.dataset.cat === cat){ it.style.display = ''; }
+          else { it.style.display = 'none'; }
+        });
+      });
+    });
+
+    /* -------------------------
+       Contact form (demo)
+       -------------------------*/
+    const form = document.getElementById('contactForm');
+    if(form){
+      form.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        // simple demo: open mail client (user can change)
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const msg = document.getElementById('message').value.trim();
+        const subject = encodeURIComponent('Order / Contact dari ' + name);
+        const body = encodeURIComponent(`Nama: ${name}\nEmail: ${email}\n\nPesan:\n${msg}`);
+        window.location.href = `mailto:sitiserliaviva@gmail.com?subject=${subject}&body=${body}`;
+      });
+    }
+
+    /* -------------------------
+       Helper: scroll to id
+       -------------------------*/
+    function scrollToId(id){
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    /* -------------------------
+       Make nav link active on scroll
+       -------------------------*/
+    const navLinks = document.querySelectorAll('nav a');
+    const sections = Array.from(navLinks).map(a=> document.querySelector(a.getAttribute('href')) ).filter(Boolean);
+    window.addEventListener('scroll', ()=>{
+      const y = window.scrollY + 140;
+      sections.forEach((s,i)=>{
+        if(y >= s.offsetTop && y < s.offsetTop + s.offsetHeight){
+          navLinks.forEach(n=>n.classList.remove('active'));
+          navLinks[i].classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
